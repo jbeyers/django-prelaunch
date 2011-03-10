@@ -7,6 +7,12 @@ class ShortCode():
     >>> alpha = map(chr, range(97, 123))
 
     No offset and direct digit substitution should be equal to str
+    >>> coder = ShortCode(0, 'abcdgg')
+    Traceback (most recent call last):
+        ...
+    Exception: Duplication in digits is not allowed.
+
+    No offset and direct digit substitution should be equal to str
     >>> coder = ShortCode(0, digits)
     >>> coder.get_shortcode(12345)
     '12345'
@@ -22,6 +28,7 @@ class ShortCode():
     >>> coder.get_number('12345')
     12245
 
+    Using hex digits give us an integer to hex conversion. 
     >>> hexer = ShortCode(0, hex)
     >>> hexer.get_shortcode(255)
     'FF'
@@ -46,6 +53,10 @@ class ShortCode():
 
     def __init__(self, offset, digits):
         """ Get the shortcode from the number """
+        # Duplication of digits is not allowed.
+        if len(digits) != len(set(digits)):
+            raise Exception('Duplication in digits is not allowed.')
+
         self.offset = offset
         self.digits = digits
 
