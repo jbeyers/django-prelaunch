@@ -24,3 +24,5 @@ Some design considerations:
 We do not create user accounts immediately, since that reduces flexibility. Forcing the creation of user accounts bloats the user account system. However, if a user account is created, the prelaunch info is surfaced as a profile.
 
 The referral code should be as short as possible. We use a list of allowed characters. The code looks like a shorturl code. We remove easily-confused characters like 1 and l, 0 and O, etc. to make it easy to read and give out to other people.
+
+The settings file contains some snippets that should be included in your project settings.py file.
