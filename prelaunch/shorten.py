@@ -1,4 +1,3 @@
-
 class ShortCode():
     """Translate from a shortcode string to integer and vice versa.
 
