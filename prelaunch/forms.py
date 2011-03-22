@@ -10,6 +10,7 @@ class ContactForm(forms.Form):
     sender = forms.EmailField()
 
 def prelaunch(request):
+    email_hash = ''
     if request.method == 'POST': # If the form has been submitted...
         form = ContactForm(request.POST) # A form bound to the POST data
         if form.is_valid():
