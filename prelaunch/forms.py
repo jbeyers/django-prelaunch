@@ -10,7 +10,9 @@ from settings import *
 
 class ContactForm(forms.Form):
     email_address = forms.EmailField()
-    prelaunch_referrer = forms.CharField(widget=forms.HiddenInput(), required=False)
+    prelaunch_referrer = forms.CharField(
+        widget=forms.HiddenInput(),
+        required=False)
 
 def prelaunch(request):
     prelaunch_parameter = getattr(settings,
@@ -20,15 +22,20 @@ def prelaunch(request):
     if request.method == 'POST': # If the form has been submitted...
         form = ContactForm(request.POST) # A form bound to the POST data
         if form.is_valid():
+            # Create a prelaunch user
+
+            # Send a welcoming/explanatory email
             c = Context({
                 'email_address': form.cleaned_data['email_address'],
                 'referrer_parameter': prelaunch_parameter,
                 'referrer_code': form.cleaned_data['prelaunch_referrer'],
             })
-            subject = loader.get_template('prelaunch/confirmation_email_subject.txt').render(c)
+            subject = loader.get_template(
+                      'prelaunch/confirmation_email_subject.txt').render(c)
             # Ensure that we have a single line subject
             subject = subject.split('\n')[0]
-            message = loader.get_template('prelaunch/confirmation_email.txt').render(c)
+            message = loader.get_template(
+                      'prelaunch/confirmation_email.txt').render(c)
             email_address = form.cleaned_data['email_address']
             sender = ''
             if settings.ADMINS:
@@ -39,10 +46,12 @@ def prelaunch(request):
 
     else:
         prelaunch_referrer = request.COOKIES.get('prelaunch_referrer', '')
-        if not prelaunch_referrer and request.REQUEST.get(prelaunch_parameter, ''):
+        if not prelaunch_referrer \
+            and request.REQUEST.get(prelaunch_parameter, ''):
             prelaunch_referrer = request.REQUEST.get(prelaunch_parameter, '')
         form = ContactForm(initial={'prelaunch_referrer': prelaunch_referrer})
 
-    return render_to_response('prelaunch/prelaunch.html', {
-        'form': form,
-    }, context_instance=RequestContext(request))
+    return render_to_response(
+        'prelaunch/prelaunch.html',
+        {'form': form},
+        context_instance=RequestContext(request))
