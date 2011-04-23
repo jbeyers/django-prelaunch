@@ -6,10 +6,11 @@ from shorten import ShortCode
 class PrelaunchSubscriber(models.Model):
     user = models.ForeignKey(User)
     email = models.EmailField()
+    referrer = models.ForeignKey('self')
 
     @property
     def shortcode(self):
         """ Get a shortcode for the user """
         shortcoder = ShortCode(settings.PRELAUNCH_OFFSET, PRELAUNCH_DIGITS)
-        return shortcoder(self.id)
+        return shortcoder.get_shortcode(self.id)
 
