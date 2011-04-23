@@ -1,16 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from prelaunch.settings import *
 from shorten import ShortCode
 
 class PrelaunchSubscriber(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, blank=True, null=True)
     email = models.EmailField()
-    referrer = models.ForeignKey('self')
+    referrer = models.ForeignKey('self', blank=True, null=True)
 
     @property
     def shortcode(self):
         """ Get a shortcode for the user """
-        shortcoder = ShortCode(settings.PRELAUNCH_OFFSET, PRELAUNCH_DIGITS)
-        return shortcoder.get_shortcode(self.id)
+        prelaunch_digits = getattr(settings, 'PRELAUNCH_DIGITS',
+                                   PRELAUNCH_DIGITS)
+        prelaunch_offset = getattr(settings, 'PRELAUNCH_OFFSET',
+                                   PRELAUNCH_OFFSET)
+        shortcode = ShortCode(prelaunch_offset, prelaunch_digits)
+        return shortcode.get_shortcode(self.id)
 
