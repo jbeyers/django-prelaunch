@@ -1,1 +1,9 @@
-Hi, you have been selected for the django prelaunch stuff.
+Thank you for applying to our closed beta!
+
+We will be sending out beta invites soon. To jump to the front of the line for an invite, just send some of your friends/followers to also apply for the beta, using the following url:
+
+http://www.django-prelaunch.com/?{{ referrer_parameter }}={{ referrer_code }}
+
+Thanks,
+
+The Django Prelaunch team
