@@ -11,7 +11,6 @@ class PrelaunchMiddleware(object):
         prelaunch_parameter = getattr(settings,
                                       'PRELAUNCH_PARAMETER_NAME',
                                       PRELAUNCH_PARAMETER_NAME)
-        print prelaunch_parameter
 
         referrer = request.REQUEST.get(prelaunch_parameter, None)
         if referrer and not request.COOKIES.get('prelaunch_referrer'):
