@@ -87,7 +87,10 @@ class ShortCode():
             for digit in shortcode[1:]:
                 number = number * base
                 number += self.digits.index(digit)
-        return number - self.offset
+        number -= self.offset
+        if number <= 0:
+            return None
+        return number
 
 
 if __name__ == "__main__":
