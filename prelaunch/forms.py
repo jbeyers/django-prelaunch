@@ -49,6 +49,7 @@ def prelaunch(request):
 
             # Send a welcoming/explanatory email
             c = Context({
+                'http_referer': request.META['HTTP_REFERER'],
                 'email_address': form.cleaned_data['email_address'],
                 'referrer_parameter': prelaunch_parameter,
                 'referrer_code': subscriber.shortcode,
