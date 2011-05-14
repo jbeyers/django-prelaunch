@@ -10,7 +10,7 @@ from models import PrelaunchSubscriber
 from shorten import ShortCode
 
 
-class ContactForm(forms.Form):          
+class PrelaunchForm(forms.Form):          
     email_address = forms.EmailField()
     prelaunch_referrer = forms.CharField(
         widget=forms.HiddenInput(),
@@ -28,7 +28,7 @@ def prelaunch(request):
     shortcode = ShortCode(prelaunch_offset, prelaunch_digits)
 
     if request.method == 'POST': # If the form has been submitted...
-        form = ContactForm(request.POST) # A form bound to the POST data
+        form = PrelaunchForm(request.POST) # A form bound to the POST data
         if form.is_valid():
             referrer = None
             if form.cleaned_data['prelaunch_referrer']:
@@ -77,7 +77,7 @@ def prelaunch(request):
         if not prelaunch_referrer \
             and request.REQUEST.get(prelaunch_parameter, ''):
             prelaunch_referrer = request.REQUEST.get(prelaunch_parameter, '')
-        form = ContactForm(initial={'prelaunch_referrer': prelaunch_referrer})
+        form = PrelaunchForm(initial={'prelaunch_referrer': prelaunch_referrer})
 
     return render_to_response(
         'prelaunch/prelaunch.html',
