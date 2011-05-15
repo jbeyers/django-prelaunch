@@ -7,8 +7,8 @@ Current functionality:
 
 * A simple signup form asking for email.
 * A referral code for each signup, used to refer other people to the site.
-* QR code image of the referral code, for easy distribution.
 * Tracking of the referral code, so that you can identify prolific referrers.
+* An example of how to show a QR code image of the referral code, for easy distribution.
 
 Future planned functionality:
 ---------------------
@@ -29,10 +29,16 @@ The referral code should be as short as possible. We use a list of allowed chara
 How to get started:
 -------------------
 
-Include django-prelaunch in your buildout.
+In your settings.py:
 
-Add 'prelaunch' to your installed apps.
+    * Make sure you include 'django.core.context_processors.request' in your context processors.
 
-Override some of the settings in the app settings.py file with your own in your project settings.py, if needed.
+    * Add 'prelaunch' to your installed apps.
 
-Customise the templates to your liking by copying them into the templates/prelaunch directory in your project and changing them.
+    * Include Override some of the settings in the app settings.py file with your own in your project settings.py, if needed.
+
+Now you can add a prelaunch form in a template by doing the following:
+
+    * add a {% load prelaunch_tags %} template tag to the template
+    * Add a {% prelaunch_form %} tag where you want the form to appear.
+    * Customise the templates to your liking by copying them into the templates/prelaunch directory in your project and changing them.
