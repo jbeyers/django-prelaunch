@@ -9,6 +9,9 @@ class PrelaunchSubscriber(models.Model):
     email = models.EmailField()
     referrer = models.ForeignKey('self', blank=True, null=True)
 
+    def __unicode__(self):
+        return u'%s' % self.email
+
     @property
     def shortcode(self):
         """ Get a shortcode for the user """
