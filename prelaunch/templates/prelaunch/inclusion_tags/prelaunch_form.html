@@ -1,0 +1,11 @@
+    {% if not email_hash %}
+        <form action="{{ form_target }}" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="submit" value="submit" />
+        </form>
+    {% else %}
+    <span>Congratulations, you are a winner! hash: {{ email_hash }}</span>
+    <div>
+        <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl={{ email_hash|urlencode }}&choe=UTF-8" />
+    </div>
+    {% endif %}
