@@ -35,10 +35,14 @@ In your settings.py:
 
     * Add 'prelaunch' to your installed apps.
 
-    * Include Override some of the settings in the app settings.py file with your own in your project settings.py, if needed.
-
 Now you can add a prelaunch form in a template by doing the following:
 
     * add a {% load prelaunch_tags %} template tag to the template
     * Add a {% prelaunch_form %} tag where you want the form to appear.
-    * Customise the templates to your liking by copying them into the templates/prelaunch directory in your project and changing them.
+
+Customising the look and feel:
+------------------------------
+
+You can customise the templates to your liking by copying them into the templates/prelaunch directory in your project and changing them.
+
+If you want to customise the settings in settings.py, just copy them to your own settings.py and customise.
