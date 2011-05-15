@@ -29,7 +29,9 @@ The referral code should be as short as possible. We use a list of allowed chara
 How to get started:
 -------------------
 
-In your settings.py:
+Firstly, make django-prelaunch part of your django project by including it in your buildout.cfg or installing it in your django instance.
+
+Then, in your settings.py:
 
     * Make sure you include 'django.core.context_processors.request' in your context processors.
 
