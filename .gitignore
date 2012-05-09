@@ -1,1 +1,4 @@
 django_prelaunch.egg-info
+build/
+dist/
+*.pyc
